@@ -673,7 +673,7 @@ table Customer
 		mode: import
 		source =
 				let
-				    Source = Csv.Document(File.Contents("C:\\Users\\adity\\Downloads\\Marketing Maven Dashbaord\\data\\raw\\marketing_data.csv"), [Delimiter=",", Columns=28, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    Source = Csv.Document(File.Contents("C:\\Users\\adity\\Downloads\\Marketing Compaign Analytics Dashbaord\\data\\raw\\marketing_data.csv"), [Delimiter=",", Columns=28, Encoding=65001, QuoteStyle=QuoteStyle.None]),
 				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
 				    #"Renamed Columns" = Table.RenameColumns(#"Promoted Headers", {{" Income ", "Income"}}),
 				    #"Trimmed Text" = Table.TransformColumns(#"Renamed Columns", {{"Education", Text.Trim, type text}, {"Marital_Status", Text.Trim, type text}, {"Country", Text.Trim, type text}}),

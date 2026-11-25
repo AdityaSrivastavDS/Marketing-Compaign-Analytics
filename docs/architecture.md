@@ -29,11 +29,10 @@ This document describes the architectural layout of the SOLVENNE Marketing Intel
                              |
                              v
 +-----------------------------------------------------------+
-|                   Packaging & CI Suite                    |
-|   - scripts/analyze.js (Statistical validation)           |
-|   - scripts/validate_solution.js (100% QA checks)         |
-|   - scripts/package_pbi.ps1 (PBIT / PBIX compiler)        |
-|   - .github/workflows/ci.yml (Automated CI validation)    |
+|              Power BI Desktop & Delivery Formats          |
+|   - powerbi/..._Dashboard.pbip (Modern Project format)    |
+|   - powerbi/..._Dashboard.pbix (Standalone desktop file)  |
+|   - powerbi/..._Dashboard.pbit (Parameterized template)   |
 +-----------------------------------------------------------+
 ```
 
