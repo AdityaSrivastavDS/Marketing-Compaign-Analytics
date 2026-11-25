@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "SOLVENNE_Marketing_Intelligence_Dashboard"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "46f24427-8ef1-4f20-bb24-a18168d375d9"
+  }
+}

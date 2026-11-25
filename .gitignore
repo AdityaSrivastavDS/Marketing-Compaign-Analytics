@@ -1,0 +1,28 @@
+# Power BI Desktop local settings and cache
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+**/.pbi/editorSettings.json
+
+# Temporary build & packaging directories
+**/temp_*
+**/pkg_*
+**/*.bak
+**/*.bak.pbix
+
+# Node dependencies and logs
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS metadata
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# IDE and editor settings
+.vscode/*
+!.vscode/settings.json
+.idea/
+*.suo
+*.user

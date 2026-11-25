@@ -1,0 +1,23 @@
+{
+  "name": "marketing-maven-dashboard",
+  "version": "1.0.0",
+  "description": "SOLVENNE Marketing Intelligence Power BI PBIP project with data analysis and validation scripts.",
+  "main": "scripts/validate_solution.js",
+  "scripts": {
+    "test": "node scripts/validate_solution.js",
+    "validate": "node scripts/validate_solution.js",
+    "analyze": "node scripts/analyze.js",
+    "build": "node scripts/build_complete_dashboard.js",
+    "package": "powershell -ExecutionPolicy Bypass -File ./scripts/package_pbi.ps1"
+  },
+  "keywords": [
+    "powerbi",
+    "pbip",
+    "pbir",
+    "marketing-analytics",
+    "dax",
+    "business-intelligence"
+  ],
+  "author": "SOLVENNE Analytics Team",
+  "license": "MIT"
+}

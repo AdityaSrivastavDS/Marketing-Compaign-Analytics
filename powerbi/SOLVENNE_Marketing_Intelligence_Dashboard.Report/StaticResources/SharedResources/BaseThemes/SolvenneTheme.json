@@ -1,0 +1,95 @@
+{
+  "name": "SOLVENNE_Executive_Vibrant",
+  "dataColors": [
+    "#0D9488",
+    "#4F46E5",
+    "#EA580C",
+    "#0284C7",
+    "#D97706",
+    "#7C3AED",
+    "#059669",
+    "#E11D48",
+    "#2563EB",
+    "#991B1B"
+  ],
+  "background": "#F1F5F9",
+  "foreground": "#0F172A",
+  "tableAccent": "#0D9488",
+  "visualStyles": {
+    "*": {
+      "*": {
+        "*": {
+          "fontFamily": "Segoe UI"
+        },
+        "background": [
+          {
+            "show": true,
+            "color": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            },
+            "transparency": 0
+          }
+        ],
+        "border": [
+          {
+            "show": true,
+            "color": {
+              "solid": {
+                "color": "#CBD5E1"
+              }
+            },
+            "radius": 8
+          }
+        ],
+        "title": [
+          {
+            "show": true,
+            "fontColor": {
+              "solid": {
+                "color": "#0F172A"
+              }
+            },
+            "fontSize": 11,
+            "fontFamily": "Segoe UI Semibold"
+          }
+        ]
+      }
+    },
+    "page": {
+      "*": {
+        "background": [
+          {
+            "color": {
+              "solid": {
+                "color": "#F1F5F9"
+              }
+            },
+            "transparency": 0
+          }
+        ]
+      }
+    },
+    "slicer": {
+      "*": {
+        "data": [
+          {
+            "mode": "Dropdown"
+          }
+        ],
+        "header": [
+          {
+            "fontColor": {
+              "solid": {
+                "color": "#0F172A"
+              }
+            },
+            "textSize": 9,
+            "fontFamily": "Segoe UI Semibold"
+          }
+        ]
+      }
+    }
+  }
+}

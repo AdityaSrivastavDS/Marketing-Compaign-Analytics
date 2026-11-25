@@ -1,0 +1,694 @@
+table Customer
+	lineageTag: f471743e-81d2-4ae6-aa88-bfa84896f091
+
+	measure 'Total Customers' = COUNTROWS('Customer')
+		formatString: #,0
+		displayFolder: 1. Customer KPIs
+		lineageTag: 7f388cc6-6d2c-4260-a0f1-ee49564364e3
+
+	measure 'Customers with Known Income' = CALCULATE(COUNTROWS('Customer'), NOT(ISBLANK('Customer'[Income])))
+		formatString: #,0
+		displayFolder: 1. Customer KPIs
+		lineageTag: 1febc7e7-d9e5-40f1-b9f5-07e0e1c5c8fd
+
+	measure 'Customers with Missing Income' = CALCULATE(COUNTROWS('Customer'), ISBLANK('Customer'[Income]))
+		formatString: #,0
+		displayFolder: 1. Customer KPIs
+		lineageTag: 0321ca70-5b91-48e4-8cfa-20a3338a84d2
+
+	measure 'Average Customer Income' = AVERAGE('Customer'[Income])
+		formatString: $#,0
+		displayFolder: 1. Customer KPIs
+		lineageTag: 83096bf7-a1a8-448c-bee1-1280b15ea0f2
+
+	measure 'Median Customer Income' = MEDIAN('Customer'[Income])
+		formatString: $#,0
+		displayFolder: 1. Customer KPIs
+		lineageTag: f4a0062e-631e-40e7-a05e-c175a024d02f
+
+	measure 'Average Customer Age' = AVERAGE('Customer'[Age])
+		formatString: 0.0
+		displayFolder: 1. Customer KPIs
+		lineageTag: 28149d93-48f7-4d70-96b7-49d7a4ddcc6d
+
+	measure 'Average Recency' = AVERAGE('Customer'[Recency])
+		formatString: 0.0
+		displayFolder: 1. Customer KPIs
+		lineageTag: 9e522026-be51-4998-b1c5-685c38571ccf
+
+	measure 'Customers with Children' = CALCULATE(COUNTROWS('Customer'), 'Customer'[Kidhome] > 0)
+		formatString: #,0
+		displayFolder: 1. Customer KPIs
+		lineageTag: cecf7d85-c921-4469-83ab-8ba6e75b7d23
+
+	measure 'Customers with Teenagers' = CALCULATE(COUNTROWS('Customer'), 'Customer'[Teenhome] > 0)
+		formatString: #,0
+		displayFolder: 1. Customer KPIs
+		lineageTag: 055ac4d9-7e8c-4c15-b677-637b24235786
+
+	measure '% Customers with Children' = DIVIDE([Customers with Children], [Total Customers])
+		formatString: 0.0%
+		displayFolder: 1. Customer KPIs
+		lineageTag: a570d24f-5036-4ad3-a4a9-ccbf2e5f818d
+
+	measure '% Customers with Teenagers' = DIVIDE([Customers with Teenagers], [Total Customers])
+		formatString: 0.0%
+		displayFolder: 1. Customer KPIs
+		lineageTag: 383bc737-8c9b-4163-837c-07b4282fa608
+
+	measure 'Campaign 1 Accepted' = SUM('Customer'[AcceptedCmp1])
+		formatString: #,0
+		displayFolder: 2. Campaign KPIs
+		lineageTag: a7e5ea7b-53f2-421b-92be-f5f7246dc04e
+
+	measure 'Campaign 2 Accepted' = SUM('Customer'[AcceptedCmp2])
+		formatString: #,0
+		displayFolder: 2. Campaign KPIs
+		lineageTag: ba887ace-ef32-475c-8d12-09d824414c83
+
+	measure 'Campaign 3 Accepted' = SUM('Customer'[AcceptedCmp3])
+		formatString: #,0
+		displayFolder: 2. Campaign KPIs
+		lineageTag: 53cb38d3-9aaf-4bd0-a131-2226b32d0171
+
+	measure 'Campaign 4 Accepted' = SUM('Customer'[AcceptedCmp4])
+		formatString: #,0
+		displayFolder: 2. Campaign KPIs
+		lineageTag: 5429de6f-daf1-41da-a2a8-7ad28acaf388
+
+	measure 'Campaign 5 Accepted' = SUM('Customer'[AcceptedCmp5])
+		formatString: #,0
+		displayFolder: 2. Campaign KPIs
+		lineageTag: 28046279-a10b-468f-b067-e1deaa15d834
+
+	measure 'Total Campaign Acceptances Across Five Historical Campaigns' = [Campaign 1 Accepted] + [Campaign 2 Accepted] + [Campaign 3 Accepted] + [Campaign 4 Accepted] + [Campaign 5 Accepted]
+		formatString: #,0
+		displayFolder: 2. Campaign KPIs
+		lineageTag: d42f514a-1f1c-4df6-b22e-f9204c362de8
+
+	measure 'Customers Accepting At Least One Historical Campaign' = CALCULATE(COUNTROWS('Customer'), 'Customer'[Campaign_Acceptance_Count] > 0)
+		formatString: #,0
+		displayFolder: 2. Campaign KPIs
+		lineageTag: 8071f996-4e63-42c2-90b4-fd8e9c75f2cb
+
+	measure '% Customers Accepting Historical Campaign' = DIVIDE([Customers Accepting At Least One Historical Campaign], [Total Customers])
+		formatString: 0.0%
+		displayFolder: 2. Campaign KPIs
+		lineageTag: 4b1c1f38-aa8f-4168-adc2-47583e25d54a
+
+	measure 'Last Campaign Responses' = SUM('Customer'[Response])
+		formatString: #,0
+		displayFolder: 2. Campaign KPIs
+		lineageTag: 63fbbf7b-3d34-4400-bb30-d99b7a8e4f60
+
+	measure 'Last Campaign Response Rate' = DIVIDE([Last Campaign Responses], [Total Customers])
+		formatString: 0.0%
+		displayFolder: 2. Campaign KPIs
+		lineageTag: 055ac64d-4947-40d3-94c3-114708533089
+
+	measure 'Campaign 1 Acceptance Rate' = DIVIDE([Campaign 1 Accepted], [Total Customers])
+		formatString: 0.0%
+		displayFolder: 2. Campaign KPIs
+		lineageTag: 9923e28b-caeb-4db2-9882-e609588c8a3b
+
+	measure 'Campaign 2 Acceptance Rate' = DIVIDE([Campaign 2 Accepted], [Total Customers])
+		formatString: 0.0%
+		displayFolder: 2. Campaign KPIs
+		lineageTag: 4f9788c1-9d6a-47fc-9c47-add5a961016b
+
+	measure 'Campaign 3 Acceptance Rate' = DIVIDE([Campaign 3 Accepted], [Total Customers])
+		formatString: 0.0%
+		displayFolder: 2. Campaign KPIs
+		lineageTag: 3e1c50a3-db03-4c44-b8a7-cc3a93b55570
+
+	measure 'Campaign 4 Acceptance Rate' = DIVIDE([Campaign 4 Accepted], [Total Customers])
+		formatString: 0.0%
+		displayFolder: 2. Campaign KPIs
+		lineageTag: af986042-010f-4e52-b057-278cbe4d51dd
+
+	measure 'Campaign 5 Acceptance Rate' = DIVIDE([Campaign 5 Accepted], [Total Customers])
+		formatString: 0.0%
+		displayFolder: 2. Campaign KPIs
+		lineageTag: e7028140-f539-4a08-adaf-e0e379a26a82
+
+	measure 'Historical Acceptors Last Campaign Response Rate' = DIVIDE(CALCULATE(SUM('Customer'[Response]), 'Customer'[Campaign_Acceptance_Count] > 0), [Customers Accepting At Least One Historical Campaign])
+		formatString: 0.0%
+		displayFolder: 2. Campaign KPIs
+		lineageTag: c1df212d-108d-4062-a931-8c7ad5d0dd3a
+
+	measure 'Non-Acceptors Last Campaign Response Rate' = DIVIDE(CALCULATE(SUM('Customer'[Response]), 'Customer'[Campaign_Acceptance_Count] = 0), CALCULATE(COUNTROWS('Customer'), 'Customer'[Campaign_Acceptance_Count] = 0))
+		formatString: 0.0%
+		displayFolder: 2. Campaign KPIs
+		lineageTag: 7f767196-8829-4d73-aedd-10b80ca9230b
+
+	measure 'Total Wine Spend' = SUM('Customer'[MntWines])
+		formatString: $#,0
+		displayFolder: 3. Product KPIs
+		lineageTag: 7081b0b0-71bf-42cb-a90f-e2dd4861a9fe
+
+	measure 'Total Fruit Spend' = SUM('Customer'[MntFruits])
+		formatString: $#,0
+		displayFolder: 3. Product KPIs
+		lineageTag: 15430cd5-ebae-4988-86ca-bc7ea7d3b1f9
+
+	measure 'Total Meat Spend' = SUM('Customer'[MntMeatProducts])
+		formatString: $#,0
+		displayFolder: 3. Product KPIs
+		lineageTag: c73caab0-277b-41c0-9963-960242dfcc3e
+
+	measure 'Total Fish Spend' = SUM('Customer'[MntFishProducts])
+		formatString: $#,0
+		displayFolder: 3. Product KPIs
+		lineageTag: 5aa82714-3240-4aea-a5eb-5ee3ac928675
+
+	measure 'Total Sweet Spend' = SUM('Customer'[MntSweetProducts])
+		formatString: $#,0
+		displayFolder: 3. Product KPIs
+		lineageTag: be97cdc5-4e40-4d94-acbe-089448e418bb
+
+	measure 'Total Gold Product Spend' = SUM('Customer'[MntGoldProds])
+		formatString: $#,0
+		displayFolder: 3. Product KPIs
+		lineageTag: e2c6c851-9de1-4143-af48-7a861b6e26a1
+
+	measure 'Total Recorded Product Spend' = [Total Wine Spend] + [Total Fruit Spend] + [Total Meat Spend] + [Total Fish Spend] + [Total Sweet Spend] + [Total Gold Product Spend]
+		formatString: $#,0
+		displayFolder: 3. Product KPIs
+		lineageTag: fbd1d39d-e66b-4a3d-af40-41d325e1d3c1
+
+	measure 'Average Recorded Product Spend per Customer' = DIVIDE([Total Recorded Product Spend], [Total Customers])
+		formatString: $#,0.00
+		displayFolder: 3. Product KPIs
+		lineageTag: 2497a3e1-ac65-49f9-b6f8-173825d662cf
+
+	measure 'Wine Spend Share %' = DIVIDE([Total Wine Spend], [Total Recorded Product Spend])
+		formatString: 0.0%
+		displayFolder: 3. Product KPIs
+		lineageTag: 9f15d61f-c2ed-4c63-aae6-6695067409f9
+
+	measure 'Meat Spend Share %' = DIVIDE([Total Meat Spend], [Total Recorded Product Spend])
+		formatString: 0.0%
+		displayFolder: 3. Product KPIs
+		lineageTag: 3d92c7fc-a7c4-4954-96d4-7de298ccfeb8
+
+	measure 'Gold Spend Share %' = DIVIDE([Total Gold Product Spend], [Total Recorded Product Spend])
+		formatString: 0.0%
+		displayFolder: 3. Product KPIs
+		lineageTag: d44c5a24-0a17-42ba-aba3-42f347355e63
+
+	measure 'Fish Spend Share %' = DIVIDE([Total Fish Spend], [Total Recorded Product Spend])
+		formatString: 0.0%
+		displayFolder: 3. Product KPIs
+		lineageTag: f0d4fde0-afae-4b5b-bc59-e62c22e6c67b
+
+	measure 'Sweet Spend Share %' = DIVIDE([Total Sweet Spend], [Total Recorded Product Spend])
+		formatString: 0.0%
+		displayFolder: 3. Product KPIs
+		lineageTag: 801365ae-1777-40bf-a5e6-6ef448fcbe6a
+
+	measure 'Fruit Spend Share %' = DIVIDE([Total Fruit Spend], [Total Recorded Product Spend])
+		formatString: 0.0%
+		displayFolder: 3. Product KPIs
+		lineageTag: 1e8ac90a-1c09-4ab5-8d9f-80f89ca613c7
+
+	measure 'Highest Spending Product Category' = "Wines ($680,816)"
+		displayFolder: 3. Product KPIs
+		lineageTag: 44bef3c4-9b42-4b4f-ab11-63f414d8741e
+
+	measure 'Total Web Purchases' = SUM('Customer'[NumWebPurchases])
+		formatString: #,0
+		displayFolder: 4. Channel KPIs
+		lineageTag: 839ca246-33b8-4ffb-a025-acf048b13af5
+
+	measure 'Total Catalog Purchases' = SUM('Customer'[NumCatalogPurchases])
+		formatString: #,0
+		displayFolder: 4. Channel KPIs
+		lineageTag: 58c21977-408b-433c-a3ee-1a5331ec1547
+
+	measure 'Total Store Purchases' = SUM('Customer'[NumStorePurchases])
+		formatString: #,0
+		displayFolder: 4. Channel KPIs
+		lineageTag: 94a8c71c-add0-441d-8219-43407ac5ac1f
+
+	measure 'Total Recorded Purchases' = [Total Web Purchases] + [Total Catalog Purchases] + [Total Store Purchases]
+		formatString: #,0
+		displayFolder: 4. Channel KPIs
+		lineageTag: 3ed4d2ec-d4e3-47d2-a771-48b96a88edbc
+
+	measure 'Web Purchase Share %' = DIVIDE([Total Web Purchases], [Total Recorded Purchases])
+		formatString: 0.0%
+		displayFolder: 4. Channel KPIs
+		lineageTag: d731aa5b-57c4-4eae-9969-82ea5f4a4738
+
+	measure 'Catalog Purchase Share %' = DIVIDE([Total Catalog Purchases], [Total Recorded Purchases])
+		formatString: 0.0%
+		displayFolder: 4. Channel KPIs
+		lineageTag: fcc4c364-649f-4dbd-a2de-d30fb067263c
+
+	measure 'Store Purchase Share %' = DIVIDE([Total Store Purchases], [Total Recorded Purchases])
+		formatString: 0.0%
+		displayFolder: 4. Channel KPIs
+		lineageTag: eec85c24-ec61-4a40-bb09-d9b531408765
+
+	measure 'Average Purchases per Customer by Channel' = DIVIDE([Total Recorded Purchases], [Total Customers])
+		formatString: 0.0
+		displayFolder: 4. Channel KPIs
+		lineageTag: 4f657395-1ef4-48c2-a657-042e23946ab2
+
+	measure 'Total Discount Purchases' = SUM('Customer'[NumDealsPurchases])
+		formatString: #,0
+		displayFolder: 4. Channel KPIs
+		lineageTag: 12e68f66-42fe-4e92-8b1a-53a3c7788c93
+
+	measure 'Average Discount Purchases' = DIVIDE([Total Discount Purchases], [Total Customers])
+		formatString: 0.0
+		displayFolder: 4. Channel KPIs
+		lineageTag: 9c77adf5-ade5-4bc8-9cfc-1ff85098884c
+
+	measure 'Discount Purchase Share %' = DIVIDE([Total Discount Purchases], [Total Recorded Purchases])
+		formatString: 0.0%
+		displayFolder: 4. Channel KPIs
+		lineageTag: d2bb2643-9b71-4578-beea-133f5df5e0db
+
+	measure 'Total Monthly Website Visits' = SUM('Customer'[NumWebVisitsMonth])
+		formatString: #,0
+		displayFolder: 4. Channel KPIs
+		lineageTag: 82fda888-e700-4af8-a2d8-6ddfaaf18dce
+
+	measure 'Average Monthly Website Visits' = DIVIDE([Total Monthly Website Visits], [Total Customers])
+		formatString: 0.0
+		displayFolder: 4. Channel KPIs
+		lineageTag: 7c2678bf-6109-4774-a442-3e374024dfff
+
+	measure 'Web Visits-to-Purchase Ratio' = DIVIDE([Total Web Purchases], [Total Monthly Website Visits])
+		formatString: 0.00
+		displayFolder: 4. Channel KPIs
+		lineageTag: d9233375-10ff-4693-bc5d-11838d6e1dd4
+
+	measure 'Complaining Customers' = SUM('Customer'[Complain])
+		formatString: #,0
+		displayFolder: 5. Customer Behaviour KPIs
+		lineageTag: 3e2ab162-16d7-4cf1-9f83-100eea126812
+
+	measure 'Complaint Rate' = DIVIDE([Complaining Customers], [Total Customers])
+		formatString: 0.0%
+		displayFolder: 5. Customer Behaviour KPIs
+		lineageTag: 41cefe04-ad5f-4c63-8bff-89d36aa2be73
+
+	measure 'Customers with Zero Recency' = CALCULATE(COUNTROWS('Customer'), 'Customer'[Recency] = 0)
+		formatString: #,0
+		displayFolder: 5. Customer Behaviour KPIs
+		lineageTag: 55dd6d7b-0c39-4e09-b257-c125b84e0237
+
+	measure 'Customers with High Recency' = CALCULATE(COUNTROWS('Customer'), 'Customer'[Recency] >= 70)
+		formatString: #,0
+		displayFolder: 5. Customer Behaviour KPIs
+		lineageTag: 92f588fe-1dc9-4491-8db8-322bf2bc8a8c
+
+	measure 'Average Spend - Campaign Acceptors' = CALCULATE([Average Recorded Product Spend per Customer], 'Customer'[Campaign_Acceptance_Count] > 0)
+		formatString: $#,0.00
+		displayFolder: 5. Customer Behaviour KPIs
+		lineageTag: 0c41eb04-92f6-4775-a92a-4116e04ff4d6
+
+	measure 'Average Spend - Non Acceptors' = CALCULATE([Average Recorded Product Spend per Customer], 'Customer'[Campaign_Acceptance_Count] = 0)
+		formatString: $#,0.00
+		displayFolder: 5. Customer Behaviour KPIs
+		lineageTag: 7e024466-0d91-4ef9-818f-5077654bb4de
+
+	measure 'Average Spend - Last Campaign Responders' = CALCULATE([Average Recorded Product Spend per Customer], 'Customer'[Response] = 1)
+		formatString: $#,0.00
+		displayFolder: 5. Customer Behaviour KPIs
+		lineageTag: 6a740e22-58d4-4b36-8fe7-5ba0885e4b67
+
+	measure 'Average Spend - Last Campaign Non-Responders' = CALCULATE([Average Recorded Product Spend per Customer], 'Customer'[Response] = 0)
+		formatString: $#,0.00
+		displayFolder: 5. Customer Behaviour KPIs
+		lineageTag: 7369f63b-f6cd-41ca-ada2-9fceeb607294
+
+	column ID
+		dataType: int64
+		lineageTag: 09cb7117-35ba-443e-b2f7-ac38d8889b19
+		summarizeBy: count
+		sourceColumn: ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year_Birth
+		dataType: int64
+		lineageTag: 6c1ac4d6-a211-42cc-aa40-41e9185b12e1
+		summarizeBy: sum
+		sourceColumn: Year_Birth
+
+		annotation SummarizationSetBy = Automatic
+
+	column Education
+		dataType: string
+		lineageTag: 05eec3f0-411f-41b8-a8d5-c86550c95192
+		summarizeBy: none
+		sourceColumn: Education
+
+		annotation SummarizationSetBy = Automatic
+
+	column Marital_Status
+		dataType: string
+		lineageTag: 06d11dc2-bc11-44f2-a507-4196ebb64433
+		summarizeBy: none
+		sourceColumn: Marital_Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column Income
+		dataType: double
+		lineageTag: 5e2fb184-56d9-4e39-a988-74f3e4a50a41
+		summarizeBy: sum
+		sourceColumn: Income
+
+		annotation SummarizationSetBy = Automatic
+
+	column Kidhome
+		dataType: int64
+		lineageTag: 8830e80b-d35a-4c1a-8019-228c33d6328b
+		summarizeBy: sum
+		sourceColumn: Kidhome
+
+		annotation SummarizationSetBy = Automatic
+
+	column Teenhome
+		dataType: int64
+		lineageTag: 1b3c4b76-7477-4ea8-9d20-ddc77e353449
+		summarizeBy: sum
+		sourceColumn: Teenhome
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dt_Customer
+		dataType: dateTime
+		formatString: yyyy-MM-dd
+		lineageTag: 008aa857-6631-4d63-a207-36bfa51be9af
+		summarizeBy: none
+		sourceColumn: Dt_Customer
+
+		variation Variation
+			isDefault
+			relationship: 716f90ca-5c8b-4b95-b8d0-a2ffcabfe7f9
+			defaultHierarchy: LocalDateTable_d2d7168e-00c8-4e37-9f8b-9130f718fd5a.'Date Hierarchy'
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Recency
+		dataType: int64
+		lineageTag: d61a35e2-251d-47bb-ac02-d0b093e5452f
+		summarizeBy: sum
+		sourceColumn: Recency
+
+		annotation SummarizationSetBy = Automatic
+
+	column MntWines
+		dataType: double
+		lineageTag: fe65c956-838e-47ec-95f2-ec16267e995a
+		summarizeBy: sum
+		sourceColumn: MntWines
+
+		annotation SummarizationSetBy = Automatic
+
+	column MntFruits
+		dataType: double
+		lineageTag: bf124955-84c5-492b-8f89-8026ae30c829
+		summarizeBy: sum
+		sourceColumn: MntFruits
+
+		annotation SummarizationSetBy = Automatic
+
+	column MntMeatProducts
+		dataType: double
+		lineageTag: 189366cd-c42a-4bc5-946e-165d1b5b27bc
+		summarizeBy: sum
+		sourceColumn: MntMeatProducts
+
+		annotation SummarizationSetBy = Automatic
+
+	column MntFishProducts
+		dataType: double
+		lineageTag: 2f384988-bf28-4db5-b40d-78dfe95d548b
+		summarizeBy: sum
+		sourceColumn: MntFishProducts
+
+		annotation SummarizationSetBy = Automatic
+
+	column MntSweetProducts
+		dataType: double
+		lineageTag: 80a7c00c-c6b4-40b3-9c85-f03304e2f3c1
+		summarizeBy: sum
+		sourceColumn: MntSweetProducts
+
+		annotation SummarizationSetBy = Automatic
+
+	column MntGoldProds
+		dataType: double
+		lineageTag: 0ef13707-6283-459d-9c1e-dadcad143626
+		summarizeBy: sum
+		sourceColumn: MntGoldProds
+
+		annotation SummarizationSetBy = Automatic
+
+	column NumDealsPurchases
+		dataType: int64
+		lineageTag: 07456927-dcbc-463a-806c-986222650dfc
+		summarizeBy: sum
+		sourceColumn: NumDealsPurchases
+
+		annotation SummarizationSetBy = Automatic
+
+	column NumWebPurchases
+		dataType: int64
+		lineageTag: 3677d855-72af-4c82-a5e3-2e22a2d00c38
+		summarizeBy: sum
+		sourceColumn: NumWebPurchases
+
+		annotation SummarizationSetBy = Automatic
+
+	column NumCatalogPurchases
+		dataType: int64
+		lineageTag: 255de788-c7c7-41ff-965f-eacec9f03eec
+		summarizeBy: sum
+		sourceColumn: NumCatalogPurchases
+
+		annotation SummarizationSetBy = Automatic
+
+	column NumStorePurchases
+		dataType: int64
+		lineageTag: b5b9c925-b63e-49bd-b78f-0d4496e23e02
+		summarizeBy: sum
+		sourceColumn: NumStorePurchases
+
+		annotation SummarizationSetBy = Automatic
+
+	column NumWebVisitsMonth
+		dataType: int64
+		lineageTag: 5478736a-d97c-48df-9a99-159bb0107235
+		summarizeBy: sum
+		sourceColumn: NumWebVisitsMonth
+
+		annotation SummarizationSetBy = Automatic
+
+	column AcceptedCmp3
+		dataType: int64
+		lineageTag: 6cfaa76e-0d01-4342-90f5-93a2af1245c1
+		summarizeBy: sum
+		sourceColumn: AcceptedCmp3
+
+		annotation SummarizationSetBy = Automatic
+
+	column AcceptedCmp4
+		dataType: int64
+		lineageTag: 4c91bc0a-18dc-4a03-8b60-810234925596
+		summarizeBy: sum
+		sourceColumn: AcceptedCmp4
+
+		annotation SummarizationSetBy = Automatic
+
+	column AcceptedCmp5
+		dataType: int64
+		lineageTag: 846a7971-6215-4af1-81c9-6e71b05b0586
+		summarizeBy: sum
+		sourceColumn: AcceptedCmp5
+
+		annotation SummarizationSetBy = Automatic
+
+	column AcceptedCmp1
+		dataType: int64
+		lineageTag: 6da07f5f-b0cb-4b65-bfad-b25ea7bc1921
+		summarizeBy: sum
+		sourceColumn: AcceptedCmp1
+
+		annotation SummarizationSetBy = Automatic
+
+	column AcceptedCmp2
+		dataType: int64
+		lineageTag: 4a666f4b-e646-4aad-b72d-e8e865a19bbc
+		summarizeBy: sum
+		sourceColumn: AcceptedCmp2
+
+		annotation SummarizationSetBy = Automatic
+
+	column Response
+		dataType: int64
+		lineageTag: c2a91d84-2c8a-4843-91e3-2d654185e4c8
+		summarizeBy: sum
+		sourceColumn: Response
+
+		annotation SummarizationSetBy = Automatic
+
+	column Complain
+		dataType: int64
+		lineageTag: 62928914-22a5-46db-90e0-a0ef7515b603
+		summarizeBy: sum
+		sourceColumn: Complain
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: 9503db76-f6d4-4560-8017-f9f5ccc2da51
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Age = 2014 - Customer[Year_Birth]
+		dataType: int64
+		lineageTag: b9b6becb-dae0-4a66-8e64-7ed7d0e13873
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Age_Group = SWITCH(TRUE(), Customer[Age] < 35, "Under 35", Customer[Age] <= 49, "35 - 49", Customer[Age] <= 64, "50 - 64", "65+")
+		dataType: string
+		lineageTag: 8c014043-142f-4fe1-8b6c-bd00a5604270
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Age_Plausibility = IF(Customer[Year_Birth] < 1920, "Flagged (Birth Year < 1920)", "Plausible")
+		dataType: string
+		lineageTag: 15dfcd88-5420-46ac-a26c-1113cd988d27
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Income_Band = SWITCH(TRUE(), ISBLANK(Customer[Income]), "Missing Income", Customer[Income] < 30000, "Low (< $30K)", Customer[Income] < 60000, "Middle ($30K-$60K)", Customer[Income] < 90000, "Upper Middle ($60K-$90K)", "High ($90K+)")
+		dataType: string
+		lineageTag: c9917053-6f6a-40b0-8941-030d4195ad1c
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Income_Status = IF(ISBLANK(Customer[Income]), "Missing Income (24)", "Known Income (2,216)")
+		dataType: string
+		lineageTag: 1f8b1eba-e05e-4880-b24f-78465d8e4130
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Household_Composition = SWITCH(TRUE(), Customer[Kidhome] = 0 && Customer[Teenhome] = 0, "No Children / Teens", Customer[Kidhome] > 0 && Customer[Teenhome] = 0, "Children Only", Customer[Kidhome] = 0 && Customer[Teenhome] > 0, "Teenagers Only", "Both Children & Teens")
+		dataType: string
+		lineageTag: ebac7327-3e58-41ab-a26f-a075db7af0cc
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Has_Children = IF(Customer[Kidhome] > 0, "With Children", "No Children")
+		dataType: string
+		lineageTag: 6866ad06-6188-41e4-b726-999a03f94636
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Has_Teens = IF(Customer[Teenhome] > 0, "With Teenagers", "No Teenagers")
+		dataType: string
+		lineageTag: ce0cbdb4-8f67-4336-a632-6681f78c9f2c
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Total_Recorded_Spend = Customer[MntWines] + Customer[MntFruits] + Customer[MntMeatProducts] + Customer[MntFishProducts] + Customer[MntSweetProducts] + Customer[MntGoldProds]
+		dataType: double
+		lineageTag: 22726def-6f45-4d0c-a01d-2090b555ffd3
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Total_Purchases = Customer[NumWebPurchases] + Customer[NumCatalogPurchases] + Customer[NumStorePurchases]
+		dataType: int64
+		lineageTag: 4eb26627-8085-4ec9-b699-3a7beb88faa0
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Customer_Value_Tier = SWITCH(TRUE(), Customer[Total_Recorded_Spend] >= 1200, "Tier 1: Elite ($1,200+)", Customer[Total_Recorded_Spend] >= 600, "Tier 2: High ($600-$1,199)", Customer[Total_Recorded_Spend] >= 200, "Tier 3: Moderate ($200-$599)", "Tier 4: Low (< $200)")
+		dataType: string
+		lineageTag: 1c2e322c-314f-4a21-811f-603a7080ab59
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Recency_Segment = SWITCH(TRUE(), Customer[Recency] < 30, "Active (< 30 days)", Customer[Recency] < 70, "Moderate (30-69 days)", "Lapsed (70+ days)")
+		dataType: string
+		lineageTag: 321d3e10-6ee6-4ca1-865c-15be0a030a66
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Campaign_Acceptance_Count = Customer[AcceptedCmp1] + Customer[AcceptedCmp2] + Customer[AcceptedCmp3] + Customer[AcceptedCmp4] + Customer[AcceptedCmp5]
+		dataType: int64
+		lineageTag: 80b3a862-9428-4c24-b55d-32170ed40b0e
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Historical_Campaign_Acceptor = IF(Customer[Campaign_Acceptance_Count] > 0, "Accepted >= 1 Campaign", "No Prior Acceptance")
+		dataType: string
+		lineageTag: 313dff74-e37e-47d1-9fa3-cef8e2623b36
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Last_Campaign_Response_Label = IF(Customer[Response] = 1, "Responded (Offer Accepted)", "Did Not Respond")
+		dataType: string
+		lineageTag: 3109025c-65b6-46e5-a0c5-cb5812a63e92
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Complaint_Label = IF(Customer[Complain] = 1, "Complained (Last 2 Yrs)", "No Complaint")
+		dataType: string
+		lineageTag: aa9dfd12-3de5-4f4f-9714-b2612ee38ae4
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Customer-Partition = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\\Users\\adity\\Downloads\\Marketing Maven Dashbaord\\data\\raw\\marketing_data.csv"), [Delimiter=",", Columns=28, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Renamed Columns" = Table.RenameColumns(#"Promoted Headers", {{" Income ", "Income"}}),
+				    #"Trimmed Text" = Table.TransformColumns(#"Renamed Columns", {{"Education", Text.Trim, type text}, {"Marital_Status", Text.Trim, type text}, {"Country", Text.Trim, type text}}),
+				    #"Replaced Missing Income" = Table.ReplaceValue(#"Trimmed Text", "", null, Replacer.ReplaceValue, {"Income"}),
+				    #"Parsed Dates" = Table.TransformColumns(#"Replaced Missing Income", {{"Dt_Customer", each Date.FromText(_, "en-GB"), type date}}),
+				    #"Changed Types" = Table.TransformColumnTypes(#"Parsed Dates", {
+				        {"ID", Int64.Type}, {"Year_Birth", Int64.Type}, {"Education", type text}, {"Marital_Status", type text},
+				        {"Income", type number}, {"Kidhome", Int64.Type}, {"Teenhome", Int64.Type}, {"Dt_Customer", type date},
+				        {"Recency", Int64.Type}, {"MntWines", type number}, {"MntFruits", type number}, {"MntMeatProducts", type number},
+				        {"MntFishProducts", type number}, {"MntSweetProducts", type number}, {"MntGoldProds", type number},
+				        {"NumDealsPurchases", Int64.Type}, {"NumWebPurchases", Int64.Type}, {"NumCatalogPurchases", Int64.Type},
+				        {"NumStorePurchases", Int64.Type}, {"NumWebVisitsMonth", Int64.Type}, {"AcceptedCmp3", Int64.Type},
+				        {"AcceptedCmp4", Int64.Type}, {"AcceptedCmp5", Int64.Type}, {"AcceptedCmp1", Int64.Type},
+				        {"AcceptedCmp2", Int64.Type}, {"Response", Int64.Type}, {"Complain", Int64.Type}, {"Country", type text}
+				    })
+				in
+				    #"Changed Types"
+

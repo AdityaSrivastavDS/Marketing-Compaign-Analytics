@@ -1,0 +1,13 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/pagesMetadata/1.1.0/schema.json",
+  "pageOrder": [
+    "ReportSection_ExecOverview",
+    "ReportSection_Demographics",
+    "ReportSection_ProductIntel",
+    "ReportSection_Campaigns",
+    "ReportSection_Channels",
+    "ReportSection_CustomerValue",
+    "ReportSection_DataExplorer"
+  ],
+  "activePageName": "ReportSection_ExecOverview"
+}
